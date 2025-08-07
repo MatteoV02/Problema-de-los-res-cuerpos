@@ -6,8 +6,8 @@ from scipy.integrate import solve_ivp
 # Constantes físicas
 G = 1.0
 m1 = 1.0
-m2 = 30.0
-m3 = 2.0
+m2 = 1.0
+m3 = 1.0
 
 # Sistema de ecuaciones diferenciales para tres cuerpos
 def three_body_ode(t, y):
@@ -48,12 +48,12 @@ y0 = [
      0.0, 8.66,    # x3, y3 (colocarlos formando un triángulo equilátero)
     0.5, 1.0,      # vx1, vy1
    -0.5, 1.0,      # vx2, vy2
-    0.0, -1.0      # vx3, vy3
+    0.5, -1.0      # vx3, vy3
 ]
 
 # Tiempo de simulación
-t_span = (0, 50000)
-t_eval = np.linspace(*t_span, 50000)
+t_span = (0, 500)
+t_eval = np.linspace(*t_span, 5000)
 
 # Resolver las ecuaciones
 sol = solve_ivp(three_body_ode, t_span, y0, t_eval=t_eval, rtol=1e-9)
