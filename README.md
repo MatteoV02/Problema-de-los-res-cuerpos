@@ -17,7 +17,7 @@ El problema de los cuerpos en interacción gravitacional es un pilar de la físi
 
 La fuerza gravitacional se modela con la Ley de Gravitación Universal de Newton que establece que toda partícula con masa ejerce una fuerza de atracción sobre otra partícula con masa, y esta fuerza es proporcional al producto de sus masas e inversamente proporcional al cuadrado de la distancia que las separa. En el contexto de una simulación de dos cuerpos que se atraen gravitacionalmente (por ejemplo, dos planetas o estrellas), esta ley se traduce en una ecuación que describe cómo varía su aceleración a lo largo del tiempo debido a esa interacción.
 
-\[ \vec{a}_i = G \cdot \frac{m_j (\vec{r}_j - \vec{r}_i)}{|\vec{r}_j - \vec{r}_i|^3} \]
+![Ecuación de aceleración](https://latex.codecogs.com/png.image?\dpi{120}\vec{a}_i=G\cdot\frac{m_j(\vec{r}_j-\vec{r}_i)}{|\vec{r}_j-\vec{r}_i|^3})
 
 En nuestro proyecto, esta ecuación fue implementada directamente en el código doscuerpos.py, dentro de la función que define el sistema de ecuaciones diferenciales. Específicamente, se calcula el vector que une ambos cuerpos, se obtiene la distancia entre ellos, y a partir de ello se evalúan las componentes de aceleración. Estas ecuaciones coinciden con la forma simplificada de las ecuaciones presentadas en el documento (Ecuación 1) para dos cuerpos sin influencia externa.
 
@@ -27,7 +27,7 @@ Cuando se extiende el análisis a un sistema con tres cuerpos que interactúan e
 
 La aceleración total que experimenta un cuerpo  𝑖 está dada por la suma de las aceleraciones individuales causadas por los otros cuerpos   𝑗  , tal como se expresa en la siguiente ecuación:
 
-\[ \vec{a}_i = G \sum_{j \neq i} \frac{m_j (\vec{r}_j - \vec{r}_i)}{|\vec{r}_j - \vec{r}_i|^3} \]
+![ecuacion](https://latex.codecogs.com/svg.image?\\vec{a}_i=G\sum_{j\neq&space;i}\frac{m_j(\vec{r}_j-\vec{r}_i)}{|\vec{r}_j-\vec{r}_i|^3}\;)
 
 Estas ecuaciones replican el modelo clásico Newtoniano para el sistema de tres cuerpos que se describe en el documento PDF, ecuación (1), con i, j, k siendo las permutaciones de los tres cuerpos.
 
@@ -37,7 +37,7 @@ En el archivo `trescuerpos.py`, estas ecuaciones se implementan explícitamente 
 
 ---
 
-## Implementación
+## Implementación y ejecución 
 
 - Lenguaje: Python 
 - Bibliotecas: `numpy`, `matplotlib`, `scipy`
@@ -48,6 +48,17 @@ Los scripts se encuentran en:
 - `doscuerpos.py`: simulación del sistema de dos cuerpos.
 - `trescuerpos.py`: simulación del sistema de tres cuerpos.
 
+Para ejecutar los script necesita:
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+.\venv\Scripts\activate  # Windows
+pip install -r requirements.txt
+
+python3 tresuerpos.py
+python3 doscuerpos.py
+```
+
 ---
 
 ## Resultados y Observaciones
@@ -57,6 +68,8 @@ En la simulación de dos cuerpos, el comportamiento es bastante predecible. Ambo
 
 Durante toda la simulación, los cuerpos mantienen una distancia relativamente estable entre sí y no se alejan indefinidamente ni colisionan. Esto confirma que el sistema es estable y que la solución numérica que implementamos está funcionando correctamente. También se observa que la velocidad de cada cuerpo cambia ligeramente a lo largo de su trayectoria, lo cual es coherente con la conservación de la energía mecánica: los cuerpos se aceleran cuando se acercan entre sí y se desaceleran al alejarse.
 
+![dosCuerpos](dosCuerpos.png)
+
 ### Tres Cuerpos
 En el caso de los tres cuerpos, el panorama cambia completamente. Aunque las condiciones iniciales pueden parecer simples o incluso simétricas, el comportamiento del sistema se vuelve rápidamente impredecible. Los cuerpos comienzan moviéndose de forma ordenada, pero conforme pasa el tiempo, las trayectorias empiezan a volverse más caóticas. Esto significa que pequeños cambios en la posición o la velocidad de alguno de los cuerpos pueden generar trayectorias completamente diferentes.
 
@@ -65,6 +78,8 @@ En la animación se pueden ver momentos donde dos cuerpos se acercan mucho y el 
 Este tipo de comportamiento es típico en el problema de los tres cuerpos y fue uno de los primeros ejemplos de lo que hoy conocemos como sistemas caóticos. Justamente, en el documento teórico que usamos como base, se menciona que la dificultad del problema está en que las ecuaciones están acopladas: la aceleración de cada cuerpo depende de los otros dos al mismo tiempo (como lo indica el “segundo término” en la ecuación 5 del PDF), lo que hace que no se puedan resolver de forma exacta con una fórmula simple.
 
 En resumen, la simulación refleja muy bien cómo un sistema tan sencillo en apariencia puede volverse increíblemente complejo, lo que lo hace fascinante tanto desde el punto de vista físico como computacional.
+
+![tresCuerpos](tresCuerpos.png)
 
 ---
 
